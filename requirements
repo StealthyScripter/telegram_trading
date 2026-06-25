@@ -3,3 +3,4 @@ python-dotenv
 pyyaml
 pytest
 telethon
+pytest-asyncio

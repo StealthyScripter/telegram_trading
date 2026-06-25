@@ -4,3 +4,6 @@ data/execution_state.json
 __pycache__/
 .pytest_cache/
 venv/
+*.session
+*.session-journal
+data/signals.json
