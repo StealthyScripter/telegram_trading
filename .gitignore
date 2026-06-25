@@ -1,0 +1,6 @@
+.env
+execution.log
+data/execution_state.json
+__pycache__/
+.pytest_cache/
+venv/

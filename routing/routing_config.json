@@ -1,0 +1,40 @@
+{
+  "default_broker": "oanda",
+  "brokers": {
+    "oanda": {
+      "default_account_env": "OANDA_DEFAULT_ACCOUNT",
+      "accounts": {
+        "scalping": {
+          "account_env": "OANDA_ACCOUNT_SCALPING",
+          "description": "Scalping account"
+        },
+        "day_trading": {
+          "account_env": "OANDA_ACCOUNT_DAY_TRADING",
+          "description": "Day trading account"
+        },
+        "long_term": {
+          "account_env": "OANDA_ACCOUNT_LONG_TERM",
+          "description": "Long-term account"
+        },
+        "signals": {
+          "account_env": "OANDA_ACCOUNT_SIGNALS",
+          "description": "General signal account"
+        }
+      }
+    }
+  },
+  "source_routes": {
+    "telegram_scalping": {
+      "broker": "oanda",
+      "strategy_account": "scalping"
+    },
+    "telegram_day_trading": {
+      "broker": "oanda",
+      "strategy_account": "day_trading"
+    },
+    "manual_main": {
+      "broker": "oanda",
+      "strategy_account": "scalping"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+broker: oanda
+
+trading:
+  default_instrument: EUR_USD
+  default_units: 1000
+  mode: practice
+
+risk:
+  max_units_per_trade: 1000
+  allow_live_trading: false
