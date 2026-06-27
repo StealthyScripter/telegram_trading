@@ -149,3 +149,43 @@ class OandaBroker:
             closed_trades.append(self.close_trade(trade_id))
 
         return closed_trades
+
+    def get_candles(
+        self,
+        symbol: str,
+        granularity: str = "M5",
+        count: int = 500,
+        price: str = "M",
+        from_time: str | None = None,
+        to_time: str | None = None,
+    ):
+        url = f"{self.base_url}/v3/instruments/{symbol}/candles"
+
+        params = {
+            "granularity": granularity,
+            "count": count,
+            "price": price,
+        }
+
+        if from_time:
+            params.pop("count", None)
+            params["from"] = from_time
+
+        if to_time:
+            params["to"] = to_time
+
+        response = requests.get(
+            url,
+            headers=self.headers,
+            params=params,
+            timeout=20,
+        )
+
+        data = response.json()
+
+        if response.status_code >= 400:
+            raise RuntimeError(
+                f"OANDA candles fetch failed: {response.status_code} - {data}"
+            )
+
+        return data.get("candles", [])

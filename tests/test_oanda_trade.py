@@ -1,3 +1,4 @@
+import pytest
 from dotenv import load_dotenv
 
 from brokers.oanda import OandaBroker
@@ -26,7 +27,7 @@ def calculate_valid_tp_sl(
 
     return round(take_profit, 5), round(stop_loss, 5)
 
-
+@pytest.mark.integration
 def test_oanda_market_trade_and_close():
     broker = OandaBroker()
     executor = TradeExecutor(broker_name="oanda")
