@@ -12,6 +12,16 @@ from decision.channel_intelligence import (
     ScoreWeights,
 )
 from decision.decision_engine import DecisionEngine
+from decision.ensemble import (
+    ConflictResult,
+    ConsensusScore,
+    EnsembleConfig,
+    EnsembleDecision,
+    EnsembleDecisionEngine,
+    EnsembleEventType,
+    EnsembleSignal,
+    EnsembleVote,
+)
 
 __all__ = [
     "ChannelGrade",
@@ -21,6 +31,14 @@ __all__ = [
     "ChannelProfileStore",
     "DecisionContext",
     "DecisionEngine",
+    "ConflictResult",
+    "ConsensusScore",
+    "EnsembleConfig",
+    "EnsembleDecision",
+    "EnsembleDecisionEngine",
+    "EnsembleEventType",
+    "EnsembleSignal",
+    "EnsembleVote",
     "ManualOverride",
     "PromotionDecision",
     "PromotionThresholds",
