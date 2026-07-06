@@ -11,6 +11,7 @@ class LearningEventType(str, Enum):
     LEARNING_RECOMMENDATION_CREATED = "LEARNING_RECOMMENDATION_CREATED"
     SOURCE_DETERIORATION_DETECTED = "SOURCE_DETERIORATION_DETECTED"
     SOURCE_IMPROVEMENT_DETECTED = "SOURCE_IMPROVEMENT_DETECTED"
+    LEARNING_UPDATED = "LEARNING_UPDATED"
 
 
 class RecommendationType(str, Enum):
@@ -28,11 +29,19 @@ class LearningRecommendation:
     recommendation: RecommendationType
     reason: str
     advisory_only: bool = True
+    human_approval_required: bool = True
+    deterministic_explanation: str = ""
     id: str = ""
 
     def __post_init__(self):
         if not self.id:
             object.__setattr__(self, "id", str(uuid4()))
+        if not self.deterministic_explanation:
+            object.__setattr__(
+                self,
+                "deterministic_explanation",
+                f"{self.recommendation.value}: {self.reason}",
+            )
 
 
 class RecommendationEngine:
@@ -59,9 +68,11 @@ class RecommendationEngine:
                 source=evaluation.source,
                 recommendation=RecommendationType.CONTINUE_PAPER,
                 reason=evaluation.reason,
+                human_approval_required=False,
             )
 
         self._emit(LearningEventType.LEARNING_RECOMMENDATION_CREATED, recommendation)
+        self._emit(LearningEventType.LEARNING_UPDATED, recommendation)
         return recommendation
 
     def _emit(
@@ -80,6 +91,8 @@ class RecommendationEngine:
                     "source": recommendation.source,
                     "recommendation": recommendation.recommendation.value,
                     "advisory_only": recommendation.advisory_only,
+                    "human_approval_required": recommendation.human_approval_required,
+                    "deterministic_explanation": recommendation.deterministic_explanation,
                 },
             )
         )

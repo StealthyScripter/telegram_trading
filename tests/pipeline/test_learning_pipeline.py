@@ -20,6 +20,7 @@ def test_learning_pipeline_recommends_pause_for_deterioration(tmp_path):
 
     assert recommendation.recommendation == RecommendationType.PAUSE
     assert recommendation.advisory_only is True
+    assert recommendation.human_approval_required is True
     assert recommendation_engine.ledger.find_by_stage("learning")
 
 
@@ -29,7 +30,7 @@ def test_learning_pipeline_creates_training_dataset(tmp_path):
     ]
     dataset = ModelTrainingDataset(ledger=EventLedger(path=str(tmp_path / "dataset.json")))
 
-    examples = dataset.from_events(events)
+    examples = dataset.refresh_from_events(events)
 
     assert len(examples) == 1
     assert examples[0].source == "alpha"

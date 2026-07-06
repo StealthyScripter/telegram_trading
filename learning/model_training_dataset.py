@@ -39,6 +39,9 @@ class ModelTrainingDataset:
             self._emit(example)
         return examples
 
+    def refresh_from_events(self, events: list[dict]) -> list[TrainingExample]:
+        return self.from_events(events)
+
     def _emit(self, example: TrainingExample):
         self.ledger.append(
             DecisionEvent(

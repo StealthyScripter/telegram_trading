@@ -16,6 +16,14 @@ class SourcePerformance:
         return self.wins / closed if closed else 0.0
 
 
+@dataclass(frozen=True)
+class TradeOutcome:
+    source: str
+    realized_r: float
+    trade_id: str | None = None
+    closed_at: str | None = None
+
+
 class PerformanceMemory:
     def build(self, events: list[dict]) -> dict[str, SourcePerformance]:
         by_source: dict[str, list[float]] = {}
@@ -39,6 +47,27 @@ class PerformanceMemory:
             for source, values in by_source.items()
         }
 
+    def ingest_outcome(
+        self,
+        existing: dict[str, SourcePerformance],
+        outcome: TradeOutcome,
+    ) -> dict[str, SourcePerformance]:
+        if not outcome.source:
+            raise ValueError("TradeOutcome.source is required")
+
+        if not isinstance(outcome.realized_r, (int, float)):
+            raise ValueError("TradeOutcome.realized_r must be numeric")
+
+        values_by_source = {
+            source: self._values_from_performance(performance)
+            for source, performance in existing.items()
+        }
+        values_by_source.setdefault(outcome.source, []).append(float(outcome.realized_r))
+        return {
+            source: self._performance(source, values)
+            for source, values in values_by_source.items()
+        }
+
     def _performance(self, source: str, values: list[float]) -> SourcePerformance:
         recent = values[-5:]
         return SourcePerformance(
@@ -49,3 +78,16 @@ class PerformanceMemory:
             net_r=sum(values),
             recent_net_r=sum(recent),
         )
+
+    def _values_from_performance(self, performance: SourcePerformance) -> list[float]:
+        values = [1.0] * performance.wins
+        values.extend([-1.0] * performance.losses)
+        breakeven_count = max(0, performance.trades - performance.wins - performance.losses)
+        values.extend([0.0] * breakeven_count)
+
+        difference = round(performance.net_r - sum(values), 10)
+        if values:
+            values[-1] += difference
+        elif performance.trades:
+            values.append(performance.net_r)
+        return values

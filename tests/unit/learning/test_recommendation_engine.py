@@ -15,6 +15,8 @@ def test_creates_advisory_recommendation(tmp_path):
 
     assert recommendation.recommendation == RecommendationType.PAUSE
     assert recommendation.advisory_only is True
+    assert recommendation.human_approval_required is True
+    assert recommendation.deterministic_explanation == "pause: bad recent performance"
 
 
 def test_ledger_events_emitted(tmp_path):
@@ -28,6 +30,30 @@ def test_ledger_events_emitted(tmp_path):
 
     assert LearningEventType.SOURCE_IMPROVEMENT_DETECTED.value in event_types
     assert LearningEventType.LEARNING_RECOMMENDATION_CREATED.value in event_types
+    assert LearningEventType.LEARNING_UPDATED.value in event_types
+
+
+def test_continue_paper_recommendation_does_not_require_human_approval(tmp_path):
+    engine = RecommendationEngine(ledger=EventLedger(path=str(tmp_path / "learning.json")))
+
+    recommendation = engine.recommend(
+        SourceEvaluation("alpha", SourceHealth.STABLE, "mixed")
+    )
+
+    assert recommendation.recommendation == RecommendationType.CONTINUE_PAPER
+    assert recommendation.human_approval_required is False
+
+
+def test_recommendation_output_is_deterministic_except_id(tmp_path):
+    engine = RecommendationEngine(ledger=EventLedger(path=str(tmp_path / "learning.json")))
+    evaluation = SourceEvaluation("alpha", SourceHealth.IMPROVING, "good")
+
+    first = engine.recommend(evaluation)
+    second = engine.recommend(evaluation)
+
+    assert first.recommendation == second.recommendation
+    assert first.reason == second.reason
+    assert first.deterministic_explanation == second.deterministic_explanation
 
 
 def test_learning_has_no_execution_or_broker_imports():
