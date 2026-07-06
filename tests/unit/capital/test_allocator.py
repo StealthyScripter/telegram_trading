@@ -293,6 +293,7 @@ def test_ledger_emits_created_and_clamped_events(tmp_path):
     assert created["trade_candidate_id"] == trade.id
     assert created["risk_decision_id"] == risk.id
     assert created["account_id"] == "acct-1"
+    assert created["explanation"]["was_clamped"] is True
 
 
 def test_rejected_allocation_emits_ledger_event(tmp_path):
@@ -315,6 +316,9 @@ def test_configuration_loading(tmp_path):
             {
                 "base_risk_percent": 0.02,
                 "min_units": 5,
+                "enable_strategy_weighting": True,
+                "strategy_weight_rules": {"scalping": 0.4},
+                "enable_confidence_weighting": True,
                 "channel_weight_rules": [
                     {"minimum_score": 80, "multiplier": 0.75},
                 ],
@@ -327,7 +331,126 @@ def test_configuration_loading(tmp_path):
 
     assert loaded.base_risk_percent == 0.02
     assert loaded.min_units == 5
+    assert loaded.enable_strategy_weighting is True
+    assert loaded.strategy_weight_rules["scalping"] == 0.4
+    assert loaded.enable_confidence_weighting is True
     assert loaded.channel_weight_rules[0].minimum_score == 80
+
+
+def test_same_inputs_produce_same_allocation(tmp_path):
+    trade = candidate()
+    risk = risk_decision(trade.id)
+    capital_allocator = allocator(tmp_path)
+
+    first = capital_allocator.allocate(trade, risk, account_state())
+    second = capital_allocator.allocate(trade, risk, account_state())
+
+    assert first.units == second.units
+    assert first.risk_amount == second.risk_amount
+    assert first.risk_percent == second.risk_percent
+    assert first.reason == second.reason
+
+
+def test_allocation_never_exceeds_approved_risk_amount(tmp_path):
+    trade = candidate()
+    risk = risk_decision(trade.id, max_risk_amount=50)
+
+    allocation = allocator(tmp_path).allocate(trade, risk, account_state())
+
+    assert allocation.risk_amount == 50
+    assert allocation.units == 10000
+
+
+def test_confidence_weighting_reduces_allocation(tmp_path):
+    trade = candidate()
+    risk = risk_decision(trade.id)
+    confidence_config = config(
+        enable_confidence_weighting=True,
+        minimum_confidence_multiplier=0.25,
+    )
+
+    allocation = allocator(tmp_path, confidence_config).allocate(
+        trade,
+        risk,
+        account_state(),
+        confidence=0.5,
+    )
+
+    assert allocation.risk_percent == 0.005
+    assert allocation.units == 10000
+    assert "confidence weighted" in allocation.reason
+
+
+def test_strategy_weighting_reduces_allocation(tmp_path):
+    trade = candidate(strategy_account="scalping")
+    risk = risk_decision(trade.id)
+    strategy_config = config(
+        enable_strategy_weighting=True,
+        strategy_weight_rules={"scalping": 0.25},
+    )
+
+    allocation = allocator(tmp_path, strategy_config).allocate(
+        trade,
+        risk,
+        account_state(),
+    )
+
+    assert allocation.risk_percent == 0.0025
+    assert allocation.units == 5000
+    assert "strategy weighted" in allocation.reason
+
+
+def test_volatility_adjusted_sizing_is_deterministic(tmp_path):
+    trade = candidate()
+    risk = risk_decision(trade.id)
+    volatility_config = config(
+        enable_volatility_adjustment=True,
+        target_volatility=0.01,
+        minimum_volatility_multiplier=0.25,
+        maximum_volatility_multiplier=1.0,
+    )
+    capital_allocator = allocator(tmp_path, volatility_config)
+
+    first = capital_allocator.allocate(trade, risk, account_state(), volatility=0.02)
+    second = capital_allocator.allocate(trade, risk, account_state(), volatility=0.02)
+
+    assert first.risk_percent == second.risk_percent == 0.005
+    assert first.units == second.units == 10000
+    assert "volatility adjusted" in first.reason
+
+
+def test_portfolio_risk_adjustment_reduces_allocation(tmp_path):
+    trade = candidate()
+    risk = risk_decision(trade.id)
+    portfolio_config = config(enable_portfolio_risk_adjustment=True)
+
+    allocation = allocator(tmp_path, portfolio_config).allocate(
+        trade,
+        risk,
+        account_state(),
+        portfolio_risk_multiplier=0.5,
+    )
+
+    assert allocation.risk_percent == 0.005
+    assert allocation.units == 10000
+    assert "portfolio risk adjusted" in allocation.reason
+
+
+def test_invalid_capital_state_fails_safely(tmp_path):
+    trade = candidate()
+    risk = risk_decision(trade.id)
+    invalid_state = AccountCapitalState(
+        account_id="acct-1",
+        broker="oanda",
+        balance=10000,
+        equity=10000,
+        available_margin=0,
+        currency="USD",
+        mode=AccountMode.PAPER,
+    )
+
+    with pytest.raises(ValueError, match="available margin"):
+        allocator(tmp_path).allocate(trade, risk, invalid_state)
 
 
 def test_legacy_explicit_units_path_remains_compatible(tmp_path):

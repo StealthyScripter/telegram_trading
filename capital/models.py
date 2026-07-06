@@ -61,6 +61,17 @@ class AllocationConfig:
     maximum_position_value: float | None = None
     minimum_channel_score: float = 0.0
     enable_channel_weighting: bool = True
+    enable_confidence_weighting: bool = False
+    minimum_confidence_multiplier: float = 0.25
+    enable_strategy_weighting: bool = False
+    strategy_weight_rules: dict[str, float] = field(default_factory=dict)
+    default_strategy_multiplier: float = 1.0
+    enable_volatility_adjustment: bool = False
+    target_volatility: float = 1.0
+    minimum_volatility_multiplier: float = 0.25
+    maximum_volatility_multiplier: float = 1.0
+    enable_portfolio_risk_adjustment: bool = False
+    portfolio_risk_multiplier: float = 1.0
     channel_weight_rules: tuple[ChannelWeightRule, ...] = field(
         default_factory=lambda: (
             ChannelWeightRule(minimum_score=90, multiplier=1.0),
@@ -95,6 +106,33 @@ class AllocationConfig:
         if not 0 <= self.minimum_channel_score <= 100:
             raise ValueError("AllocationConfig.minimum_channel_score must be between 0 and 100")
 
+        if not 0 <= self.minimum_confidence_multiplier <= 1:
+            raise ValueError("AllocationConfig.minimum_confidence_multiplier must be between 0 and 1")
+
+        if self.default_strategy_multiplier < 0:
+            raise ValueError("AllocationConfig.default_strategy_multiplier cannot be negative")
+
+        for name, multiplier in self.strategy_weight_rules.items():
+            if not name:
+                raise ValueError("AllocationConfig.strategy_weight_rules keys cannot be empty")
+            if multiplier < 0:
+                raise ValueError("AllocationConfig.strategy_weight_rules multipliers cannot be negative")
+
+        if self.target_volatility <= 0:
+            raise ValueError("AllocationConfig.target_volatility must be greater than 0")
+
+        if self.minimum_volatility_multiplier < 0:
+            raise ValueError("AllocationConfig.minimum_volatility_multiplier cannot be negative")
+
+        if self.maximum_volatility_multiplier <= 0:
+            raise ValueError("AllocationConfig.maximum_volatility_multiplier must be greater than 0")
+
+        if self.minimum_volatility_multiplier > self.maximum_volatility_multiplier:
+            raise ValueError("AllocationConfig.minimum_volatility_multiplier cannot exceed maximum")
+
+        if self.portfolio_risk_multiplier < 0:
+            raise ValueError("AllocationConfig.portfolio_risk_multiplier cannot be negative")
+
     @classmethod
     def from_dict(cls, data: dict | None):
         data = data or {}
@@ -116,6 +154,35 @@ class AllocationConfig:
             maximum_position_value=data.get("maximum_position_value"),
             minimum_channel_score=data.get("minimum_channel_score", defaults.minimum_channel_score),
             enable_channel_weighting=data.get("enable_channel_weighting", defaults.enable_channel_weighting),
+            enable_confidence_weighting=data.get("enable_confidence_weighting", defaults.enable_confidence_weighting),
+            minimum_confidence_multiplier=data.get(
+                "minimum_confidence_multiplier",
+                defaults.minimum_confidence_multiplier,
+            ),
+            enable_strategy_weighting=data.get("enable_strategy_weighting", defaults.enable_strategy_weighting),
+            strategy_weight_rules=data.get("strategy_weight_rules", defaults.strategy_weight_rules),
+            default_strategy_multiplier=data.get(
+                "default_strategy_multiplier",
+                defaults.default_strategy_multiplier,
+            ),
+            enable_volatility_adjustment=data.get(
+                "enable_volatility_adjustment",
+                defaults.enable_volatility_adjustment,
+            ),
+            target_volatility=data.get("target_volatility", defaults.target_volatility),
+            minimum_volatility_multiplier=data.get(
+                "minimum_volatility_multiplier",
+                defaults.minimum_volatility_multiplier,
+            ),
+            maximum_volatility_multiplier=data.get(
+                "maximum_volatility_multiplier",
+                defaults.maximum_volatility_multiplier,
+            ),
+            enable_portfolio_risk_adjustment=data.get(
+                "enable_portfolio_risk_adjustment",
+                defaults.enable_portfolio_risk_adjustment,
+            ),
+            portfolio_risk_multiplier=data.get("portfolio_risk_multiplier", defaults.portfolio_risk_multiplier),
             channel_weight_rules=parsed_rules,
         )
 
@@ -133,3 +200,4 @@ class AllocationDecision:
     risk_percent: float = 0.0
     calculated_units: int = 0
     clamped_units: int = 0
+    explanation: dict = field(default_factory=dict)
