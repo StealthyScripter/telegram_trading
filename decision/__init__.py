@@ -22,6 +22,14 @@ from decision.ensemble import (
     EnsembleSignal,
     EnsembleVote,
 )
+from decision.ml_model import (
+    MLModel,
+    MLEventType,
+    ModelDecisionContext,
+    ModelInputFeatures,
+    ModelVersion,
+    SignalQualityPrediction,
+)
 
 __all__ = [
     "ChannelGrade",
@@ -39,6 +47,12 @@ __all__ = [
     "EnsembleEventType",
     "EnsembleSignal",
     "EnsembleVote",
+    "MLEventType",
+    "MLModel",
+    "ModelDecisionContext",
+    "ModelInputFeatures",
+    "ModelVersion",
+    "SignalQualityPrediction",
     "ManualOverride",
     "PromotionDecision",
     "PromotionThresholds",
