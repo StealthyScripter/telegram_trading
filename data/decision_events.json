@@ -1,0 +1,1638 @@
+{
+  "events": [
+    {
+      "stage": "decision",
+      "input_id": "f1457d28-c4af-46a9-94c4-71a090655e9e",
+      "output_id": "67973eb1-2b6f-4583-a596-6e63b714e657",
+      "reason": "Manual override: force_paper",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "f1457d28-c4af-46a9-94c4-71a090655e9e",
+        "trade_candidate_id": "67973eb1-2b6f-4583-a596-6e63b714e657",
+        "outcome": "approve",
+        "score": 0.57,
+        "candidate_status": "PAPER_ONLY",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          },
+          {
+            "name": "channel_intelligence",
+            "score": 0.35,
+            "weight": 0.2,
+            "value": 0.06999999999999999,
+            "reason": "Manual override: force_paper"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "4d9f3aaa-376d-4972-834e-65b61d8594c2",
+      "created_at": "2026-07-06T21:33:30.996803+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "718e03bc-ad1d-40f4-9a59-c61f10836c9d",
+      "output_id": "75ca5031-674e-478a-883e-95603f41b7bc",
+      "reason": "Decision rejected with score 0.57",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "718e03bc-ad1d-40f4-9a59-c61f10836c9d",
+        "trade_candidate_id": "75ca5031-674e-478a-883e-95603f41b7bc",
+        "outcome": "reject",
+        "score": 0.57,
+        "candidate_status": "REJECTED",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          },
+          {
+            "name": "channel_intelligence",
+            "score": 0.35,
+            "weight": 0.2,
+            "value": 0.06999999999999999,
+            "reason": "Manual override: force_reject"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "5f570254-b71a-4084-aa03-eec164a4bb6f",
+      "created_at": "2026-07-06T21:33:31.001441+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "b92ed060-1b5f-49bd-9edb-7b02a4b11127",
+      "output_id": "cd9c3873-a8c3-4aac-b17e-98d89bd6345f",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "b92ed060-1b5f-49bd-9edb-7b02a4b11127",
+        "trade_candidate_id": "cd9c3873-a8c3-4aac-b17e-98d89bd6345f",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "37c19f6b-0d74-4fd7-a71a-843e5800fdce",
+      "created_at": "2026-07-06T21:33:37.639621+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "4fd81e0f-a81a-464b-8362-d0a4de81e3bd",
+      "output_id": "4819b079-396b-49a9-b339-ab7e7eeca237",
+      "reason": "No symbol or action found",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "4fd81e0f-a81a-464b-8362-d0a4de81e3bd",
+        "trade_candidate_id": "4819b079-396b-49a9-b339-ab7e7eeca237",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "1b4c18d9-9e90-45ec-b35a-f7913934ceb8",
+      "created_at": "2026-07-06T21:33:37.641407+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "f2870171-dd5b-4074-b9fd-386e02797e6e",
+      "output_id": "7f2e1aed-857d-4adc-9b89-91cd8803da4d",
+      "reason": "Manual override: force_paper",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "f2870171-dd5b-4074-b9fd-386e02797e6e",
+        "trade_candidate_id": "7f2e1aed-857d-4adc-9b89-91cd8803da4d",
+        "outcome": "approve",
+        "score": 0.57,
+        "candidate_status": "PAPER_ONLY",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          },
+          {
+            "name": "channel_intelligence",
+            "score": 0.35,
+            "weight": 0.2,
+            "value": 0.06999999999999999,
+            "reason": "Manual override: force_paper"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "7126e049-e039-4b2e-9b42-5bf7e8d84ae8",
+      "created_at": "2026-07-06T21:33:37.646265+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "83edd9b3-928f-4a11-af4f-b87c1f6b2a0a",
+      "output_id": "e94331f7-5b08-42dd-b655-219c45838127",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "83edd9b3-928f-4a11-af4f-b87c1f6b2a0a",
+        "trade_candidate_id": "e94331f7-5b08-42dd-b655-219c45838127",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "2d279e8d-20a6-4fee-8c49-e6c2f0df597b",
+      "created_at": "2026-07-06T21:33:37.648503+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "32a35a43-13bb-4031-8830-519da2bff2a5",
+      "output_id": "75ce928e-0917-4a18-8779-5b5cf0998bfb",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "32a35a43-13bb-4031-8830-519da2bff2a5",
+        "trade_candidate_id": "75ce928e-0917-4a18-8779-5b5cf0998bfb",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "9af9462e-8274-45de-b528-9161f1488f1f",
+      "created_at": "2026-07-06T21:33:37.652304+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "99ae0128-626e-465d-8599-a8d188140002",
+      "output_id": "b88a3569-3a48-4a3d-9e96-aef0fa372eee",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "99ae0128-626e-465d-8599-a8d188140002",
+        "trade_candidate_id": "b88a3569-3a48-4a3d-9e96-aef0fa372eee",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "d49b8d20-688f-4cdb-83cf-f9328d502498",
+      "created_at": "2026-07-06T21:33:37.653206+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "cefaa7d2-4803-4352-b533-458ff8636774",
+      "output_id": "8a6b425b-b0d0-440a-80f6-447d472eac34",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "cefaa7d2-4803-4352-b533-458ff8636774",
+        "trade_candidate_id": "8a6b425b-b0d0-440a-80f6-447d472eac34",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "ae8aeadd-5385-4f29-8d42-54a9642b8b7f",
+      "created_at": "2026-07-06T21:33:37.655708+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "263f68be-109b-4ee6-a91a-7baf66646c87",
+      "output_id": "d1ac6e4d-c439-4682-981e-d36d10bfcbab",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "263f68be-109b-4ee6-a91a-7baf66646c87",
+        "trade_candidate_id": "d1ac6e4d-c439-4682-981e-d36d10bfcbab",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "dc103f9c-ae21-4dbe-9003-7f525b159f63",
+      "created_at": "2026-07-06T21:33:37.656613+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "a86f4f97-e0a7-475e-b775-00d6ba254a6f",
+      "output_id": "ed13a7ee-d87b-4dd5-9595-b37aa106da8c",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "a86f4f97-e0a7-475e-b775-00d6ba254a6f",
+        "trade_candidate_id": "ed13a7ee-d87b-4dd5-9595-b37aa106da8c",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "a559d382-9694-4ce4-9ed4-1e438e99760d",
+      "created_at": "2026-07-06T21:33:37.661503+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "34ebac6f-383d-443f-abd6-3f227e2fda1d",
+      "output_id": "314a57ec-5bc0-4a06-9de6-2a96bc28fd87",
+      "reason": "Missing: stop_loss, take_profit",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "34ebac6f-383d-443f-abd6-3f227e2fda1d",
+        "trade_candidate_id": "314a57ec-5bc0-4a06-9de6-2a96bc28fd87",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "d4161da6-7031-4905-b2ef-71c4152c4fc0",
+      "created_at": "2026-07-06T21:33:37.663973+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "a7da2c85-3948-495f-a482-9e5d72ff8286",
+      "output_id": "29736933-af63-4438-a412-1ea5c64cf0e2",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "a7da2c85-3948-495f-a482-9e5d72ff8286",
+        "trade_candidate_id": "29736933-af63-4438-a412-1ea5c64cf0e2",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "28f57ac8-f594-4fce-8226-d25d53f91ae4",
+      "created_at": "2026-07-06T21:33:37.666315+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "16f0621e-3e33-429f-b743-68f99d1d005f",
+      "output_id": "7b6aaf0c-5075-4239-b0b8-9b5002b234f9",
+      "reason": "No symbol or action found",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "16f0621e-3e33-429f-b743-68f99d1d005f",
+        "trade_candidate_id": "7b6aaf0c-5075-4239-b0b8-9b5002b234f9",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "099dfc1e-7b89-4cd6-9ca1-a19f23b01830",
+      "created_at": "2026-07-06T21:33:37.668449+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "7898f7f4-ca01-4886-a2c1-b001d6eeb73f",
+      "output_id": "d5e3d967-bfff-470a-ae99-a02cad0ab712",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "7898f7f4-ca01-4886-a2c1-b001d6eeb73f",
+        "trade_candidate_id": "d5e3d967-bfff-470a-ae99-a02cad0ab712",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "66977956-5e39-46f3-947e-bf8236dc3519",
+      "created_at": "2026-07-06T21:33:37.670475+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "39662168-73c4-4f02-9a87-517d84e4dcb0",
+      "output_id": "39f2a401-6165-40a1-8b12-eeda69c1e80f",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "39662168-73c4-4f02-9a87-517d84e4dcb0",
+        "trade_candidate_id": "39f2a401-6165-40a1-8b12-eeda69c1e80f",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "5242919b-b3d3-4b96-8654-fce410b66004",
+      "created_at": "2026-07-06T21:33:37.672928+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "a6f790f7-71d3-4eba-9238-f87d1651a74c",
+      "output_id": "7b06782d-1ab5-45ab-b0b9-637cd0dd29d3",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "a6f790f7-71d3-4eba-9238-f87d1651a74c",
+        "trade_candidate_id": "7b06782d-1ab5-45ab-b0b9-637cd0dd29d3",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "9e3d1a8b-2a44-439a-b74e-4613e8d51a64",
+      "created_at": "2026-07-06T21:33:37.675347+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "669de741-6b04-4316-bfe8-5eaeed1370d4",
+      "output_id": "995de18e-ce4b-4ead-b743-d5649e503c57",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "669de741-6b04-4316-bfe8-5eaeed1370d4",
+        "trade_candidate_id": "995de18e-ce4b-4ead-b743-d5649e503c57",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "9fc15038-9566-456b-8206-4fbaa8e34702",
+      "created_at": "2026-07-06T21:33:37.676445+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "f96df956-7d20-4cdf-a032-e50cef39d2a9",
+      "output_id": "6ceb738c-e000-47d3-a3c7-f2203c452acd",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "f96df956-7d20-4cdf-a032-e50cef39d2a9",
+        "trade_candidate_id": "6ceb738c-e000-47d3-a3c7-f2203c452acd",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "99617f53-eaeb-4970-8aee-d21eae9237b9",
+      "created_at": "2026-07-06T21:33:37.679583+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "df33d739-6394-4e23-8e7c-04ea12db1844",
+      "output_id": "62ad7186-6163-4b34-8fc5-32624e9ad1df",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "df33d739-6394-4e23-8e7c-04ea12db1844",
+        "trade_candidate_id": "62ad7186-6163-4b34-8fc5-32624e9ad1df",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "0ac2acbf-cd70-4097-add7-eb14a9eca393",
+      "created_at": "2026-07-06T21:33:37.680703+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "dd3cc83d-6cf3-4616-86b2-3ad9e2b5bdbc",
+      "output_id": "2b456ad4-d3de-4a32-ab0c-2201bcc38477",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "dd3cc83d-6cf3-4616-86b2-3ad9e2b5bdbc",
+        "trade_candidate_id": "2b456ad4-d3de-4a32-ab0c-2201bcc38477",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "848dc4cd-85ac-4a0e-8948-4581d338b29a",
+      "created_at": "2026-07-06T21:33:37.683610+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "2b43f02e-b3a9-4c94-9fbd-6ccc7d3764de",
+      "output_id": "71291244-c37a-43cc-92b6-c2813a7b576b",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "2b43f02e-b3a9-4c94-9fbd-6ccc7d3764de",
+        "trade_candidate_id": "71291244-c37a-43cc-92b6-c2813a7b576b",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "2972954b-a082-4f62-abff-9348bcee25ef",
+      "created_at": "2026-07-06T21:33:37.688470+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "6514454a-aa14-40a0-b999-69181bd0546b",
+      "output_id": "05037291-639e-44a4-bb35-c2c60a57c8db",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "6514454a-aa14-40a0-b999-69181bd0546b",
+        "trade_candidate_id": "05037291-639e-44a4-bb35-c2c60a57c8db",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "14bad51b-7b0b-4ea7-8bcf-55c8e35cbb92",
+      "created_at": "2026-07-06T21:33:37.692747+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "93c8385e-e6d3-447b-af8d-d7ac15f2643c",
+      "output_id": "ee903a53-71b4-4f14-895d-3b3b8bb3be10",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "93c8385e-e6d3-447b-af8d-d7ac15f2643c",
+        "trade_candidate_id": "ee903a53-71b4-4f14-895d-3b3b8bb3be10",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "d769c5eb-3519-4ecd-8f26-07ca037ed31e",
+      "created_at": "2026-07-06T21:33:37.697300+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "a1efd376-f216-4dbf-b415-8143662eceac",
+      "output_id": "08812584-626c-4d0e-bbff-ad49867d49c8",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "a1efd376-f216-4dbf-b415-8143662eceac",
+        "trade_candidate_id": "08812584-626c-4d0e-bbff-ad49867d49c8",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "07558c4b-33df-428a-a833-3e828852e0d8",
+      "created_at": "2026-07-06T21:33:37.702760+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "6e445dd4-c2c0-4c8f-9499-db35a86aa47a",
+      "output_id": "a8e0ee70-221b-4dfe-a458-259c51af8da1",
+      "reason": "No symbol or action found",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "6e445dd4-c2c0-4c8f-9499-db35a86aa47a",
+        "trade_candidate_id": "a8e0ee70-221b-4dfe-a458-259c51af8da1",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "cd0f4a79-4651-4108-9370-ec7435ddcc88",
+      "created_at": "2026-07-06T21:33:37.704379+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "d23d6335-5177-44b7-bd26-24d8e270e6d9",
+      "output_id": "c3709188-f317-4049-980f-cba4a6d1d5b3",
+      "reason": "Missing: stop_loss, take_profit",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "d23d6335-5177-44b7-bd26-24d8e270e6d9",
+        "trade_candidate_id": "c3709188-f317-4049-980f-cba4a6d1d5b3",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "14c6acb3-97e0-4f59-8da1-f2aa09151f40",
+      "created_at": "2026-07-06T21:33:37.705807+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "b6a13b1e-4b75-44ea-9cf7-b5d17eaed861",
+      "output_id": "b43c52cd-6c3c-42ae-8c1f-e2d90745a02a",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "b6a13b1e-4b75-44ea-9cf7-b5d17eaed861",
+        "trade_candidate_id": "b43c52cd-6c3c-42ae-8c1f-e2d90745a02a",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "e0c6447b-599d-484a-8054-22d6ac4a4159",
+      "created_at": "2026-07-06T21:33:37.708212+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "10a3ea6d-b7a9-417f-a923-d70c2fd7ae36",
+      "output_id": "cd20dc83-6781-49dc-94df-e9fde8e2fe40",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "10a3ea6d-b7a9-417f-a923-d70c2fd7ae36",
+        "trade_candidate_id": "cd20dc83-6781-49dc-94df-e9fde8e2fe40",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "674a7e96-63e4-480a-8874-e40d705908f7",
+      "created_at": "2026-07-06T21:33:37.712920+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "9c771af4-cd0b-4229-bc6a-e7165e064316",
+      "output_id": "21d8fb96-18a8-41cc-9627-e5ebc0bf51bc",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "9c771af4-cd0b-4229-bc6a-e7165e064316",
+        "trade_candidate_id": "21d8fb96-18a8-41cc-9627-e5ebc0bf51bc",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "9c602ea8-0c20-4e57-bfcf-16ae01285d2a",
+      "created_at": "2026-07-06T21:34:51.184971+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "4fc0613d-b026-4782-a821-46c5368fd0d2",
+      "output_id": "e91c92d9-caba-4af9-bbef-df0683d56922",
+      "reason": "Missing: stop_loss, take_profit",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "4fc0613d-b026-4782-a821-46c5368fd0d2",
+        "trade_candidate_id": "e91c92d9-caba-4af9-bbef-df0683d56922",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "21dbcc30-badb-4f27-adf9-65891cc7e639",
+      "created_at": "2026-07-06T21:34:51.189477+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "9af02ee5-51f0-432a-98ed-fea003a8789e",
+      "output_id": "73597ee3-1e5e-451c-96f6-f9e8f8834802",
+      "reason": "Manual override: force_paper",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "9af02ee5-51f0-432a-98ed-fea003a8789e",
+        "trade_candidate_id": "73597ee3-1e5e-451c-96f6-f9e8f8834802",
+        "outcome": "approve",
+        "score": 0.57,
+        "candidate_status": "PAPER_ONLY",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          },
+          {
+            "name": "channel_intelligence",
+            "score": 0.35,
+            "weight": 0.2,
+            "value": 0.06999999999999999,
+            "reason": "Manual override: force_paper"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "b63ee613-db28-40ed-ac1c-fc33c092fc8e",
+      "created_at": "2026-07-06T21:34:55.168304+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "8c6a7ed9-423d-4126-897f-69a3da9a1ec3",
+      "output_id": "6036ba3e-a5d2-4ad2-ad08-6aad96dc80b6",
+      "reason": "Decision rejected with score 0.57",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "8c6a7ed9-423d-4126-897f-69a3da9a1ec3",
+        "trade_candidate_id": "6036ba3e-a5d2-4ad2-ad08-6aad96dc80b6",
+        "outcome": "reject",
+        "score": 0.57,
+        "candidate_status": "REJECTED",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          },
+          {
+            "name": "channel_intelligence",
+            "score": 0.35,
+            "weight": 0.2,
+            "value": 0.06999999999999999,
+            "reason": "Manual override: force_reject"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "543305ef-2d8e-4665-82c8-4857530f7c0d",
+      "created_at": "2026-07-06T21:34:55.175508+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "296509c2-a9e9-4aa7-abdc-a3ff50217984",
+      "output_id": "4f37c7f7-ec2d-480c-81c8-2fe229a330a9",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "296509c2-a9e9-4aa7-abdc-a3ff50217984",
+        "trade_candidate_id": "4f37c7f7-ec2d-480c-81c8-2fe229a330a9",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "20a1cdc7-181c-4093-8a0b-0ae94b81ed17",
+      "created_at": "2026-07-06T21:35:01.877296+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "02a47d93-e1b5-47a6-abbb-b99b664e12e9",
+      "output_id": "42077ed8-5031-45c3-9097-d6f43ed6ae04",
+      "reason": "No symbol or action found",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "02a47d93-e1b5-47a6-abbb-b99b664e12e9",
+        "trade_candidate_id": "42077ed8-5031-45c3-9097-d6f43ed6ae04",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "355127b9-0309-4aae-8b08-d96410fbfc9e",
+      "created_at": "2026-07-06T21:35:01.879866+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "df9343fd-bff9-49a1-96da-8b8624475178",
+      "output_id": "b61542c6-b7d2-48a4-ba1a-ec2d185dd954",
+      "reason": "Manual override: force_paper",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "df9343fd-bff9-49a1-96da-8b8624475178",
+        "trade_candidate_id": "b61542c6-b7d2-48a4-ba1a-ec2d185dd954",
+        "outcome": "approve",
+        "score": 0.57,
+        "candidate_status": "PAPER_ONLY",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          },
+          {
+            "name": "channel_intelligence",
+            "score": 0.35,
+            "weight": 0.2,
+            "value": 0.06999999999999999,
+            "reason": "Manual override: force_paper"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "e919db32-af76-4000-b507-c47160bc7724",
+      "created_at": "2026-07-06T21:35:01.886524+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "51ca98fc-f762-4b94-8387-0f705f484fc6",
+      "output_id": "18683a57-5af4-4793-ad35-da6a6d0b2e8a",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "51ca98fc-f762-4b94-8387-0f705f484fc6",
+        "trade_candidate_id": "18683a57-5af4-4793-ad35-da6a6d0b2e8a",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "fb1995eb-38fc-431a-b77f-4e3fdeaa187d",
+      "created_at": "2026-07-06T21:35:01.889258+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "bb81cc6c-470e-4808-b9ca-9291f171f078",
+      "output_id": "a4c7b942-2aa1-4aac-8784-4f7265a457da",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "bb81cc6c-470e-4808-b9ca-9291f171f078",
+        "trade_candidate_id": "a4c7b942-2aa1-4aac-8784-4f7265a457da",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "cf4b5ba5-234d-4eaf-bef7-f8313d400990",
+      "created_at": "2026-07-06T21:35:01.893990+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "fad368fc-dff2-4236-be19-1c06802a89b2",
+      "output_id": "58416cbd-e604-41ee-bf58-d1ac86d84b43",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "fad368fc-dff2-4236-be19-1c06802a89b2",
+        "trade_candidate_id": "58416cbd-e604-41ee-bf58-d1ac86d84b43",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "ca96d686-c872-4985-81ab-64f2ea5e2f47",
+      "created_at": "2026-07-06T21:35:01.895569+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "f2590a29-d88b-42cd-a15b-97b765755103",
+      "output_id": "feb71031-ac55-490f-b57b-384b5e4abaaf",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "f2590a29-d88b-42cd-a15b-97b765755103",
+        "trade_candidate_id": "feb71031-ac55-490f-b57b-384b5e4abaaf",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "b3d5e4df-7ebd-45f3-ab2f-93ff346749ac",
+      "created_at": "2026-07-06T21:35:01.898537+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "303e0ff6-8060-457c-ba94-49ce49bef042",
+      "output_id": "73330799-7263-43bb-ae55-b18d2dbee29b",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "303e0ff6-8060-457c-ba94-49ce49bef042",
+        "trade_candidate_id": "73330799-7263-43bb-ae55-b18d2dbee29b",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "5f709668-c2fc-41a8-b1f2-c15077cbc22d",
+      "created_at": "2026-07-06T21:35:01.899989+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "14de3f14-be9c-4792-882b-e680c4421bae",
+      "output_id": "4723ed9c-397c-4119-9684-984c67560728",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "14de3f14-be9c-4792-882b-e680c4421bae",
+        "trade_candidate_id": "4723ed9c-397c-4119-9684-984c67560728",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "466e92d1-0fbd-4495-8888-221f0891384c",
+      "created_at": "2026-07-06T21:35:01.905214+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "accc1ebb-cd0f-4b03-b8c6-fc3f4fed4e29",
+      "output_id": "a619e332-4754-4380-8645-1d857546f86d",
+      "reason": "Missing: stop_loss, take_profit",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "accc1ebb-cd0f-4b03-b8c6-fc3f4fed4e29",
+        "trade_candidate_id": "a619e332-4754-4380-8645-1d857546f86d",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "f53c689d-c054-44d9-9c6c-9b1cd06ac986",
+      "created_at": "2026-07-06T21:35:01.909130+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "c35e9758-2713-431a-bbd2-a317c9f8c612",
+      "output_id": "8a8dab74-9a80-433b-83ec-447a9e5ac06e",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "c35e9758-2713-431a-bbd2-a317c9f8c612",
+        "trade_candidate_id": "8a8dab74-9a80-433b-83ec-447a9e5ac06e",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "24782f3d-57e4-4507-8b51-0b081d44ee93",
+      "created_at": "2026-07-06T21:35:01.914553+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "b0030323-27f7-4795-9da3-2ad0a1dc55e7",
+      "output_id": "7985519d-9476-4f0a-8b0c-b4a0d0882a25",
+      "reason": "No symbol or action found",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "b0030323-27f7-4795-9da3-2ad0a1dc55e7",
+        "trade_candidate_id": "7985519d-9476-4f0a-8b0c-b4a0d0882a25",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "b61c7581-02be-4d3a-a45b-24ceafc4b41a",
+      "created_at": "2026-07-06T21:35:01.917674+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "ce2d56e2-63dc-40f7-9e88-9f2269ba868f",
+      "output_id": "eb6f293e-735f-4616-bab7-25b63e47e06d",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "ce2d56e2-63dc-40f7-9e88-9f2269ba868f",
+        "trade_candidate_id": "eb6f293e-735f-4616-bab7-25b63e47e06d",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "6a10e6d0-828f-4c3d-b717-11fee4b136ae",
+      "created_at": "2026-07-06T21:35:01.920514+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "8aec7b0d-1408-4fa1-bb0e-104e2a28544f",
+      "output_id": "f286cfba-0876-4ee9-b793-d463d15dcb54",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "8aec7b0d-1408-4fa1-bb0e-104e2a28544f",
+        "trade_candidate_id": "f286cfba-0876-4ee9-b793-d463d15dcb54",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "70647547-6885-4a0d-8c75-2e264c67d16b",
+      "created_at": "2026-07-06T21:35:01.923506+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "82a3ddcb-8812-4199-acae-caa13a3fcac3",
+      "output_id": "63fd24d4-d4c9-4add-9234-807cb4f99d00",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "82a3ddcb-8812-4199-acae-caa13a3fcac3",
+        "trade_candidate_id": "63fd24d4-d4c9-4add-9234-807cb4f99d00",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "4c2814cf-863d-44eb-ba58-1917d18a119d",
+      "created_at": "2026-07-06T21:35:01.926388+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "16c974e4-ab09-4c8f-b2a2-0efdaf8f0324",
+      "output_id": "c5a5997d-4538-45da-a304-2b4a872dac06",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "16c974e4-ab09-4c8f-b2a2-0efdaf8f0324",
+        "trade_candidate_id": "c5a5997d-4538-45da-a304-2b4a872dac06",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "f336d4f4-630b-4b77-bd02-88301680c5e3",
+      "created_at": "2026-07-06T21:35:01.928042+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "e00f8e37-0d84-40ef-998e-2ca94281fede",
+      "output_id": "f19bcca1-578a-4bb5-b582-db89da7f5846",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "e00f8e37-0d84-40ef-998e-2ca94281fede",
+        "trade_candidate_id": "f19bcca1-578a-4bb5-b582-db89da7f5846",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "58199e07-a8a9-4048-baeb-da5c42093bb7",
+      "created_at": "2026-07-06T21:35:01.931353+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "eece5047-1e6e-4515-8391-dc03bc490447",
+      "output_id": "5e7a9621-37fe-47f1-ad8e-250cc7051244",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "eece5047-1e6e-4515-8391-dc03bc490447",
+        "trade_candidate_id": "5e7a9621-37fe-47f1-ad8e-250cc7051244",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "9c0eb2e6-b329-439c-8829-2eb584a88a62",
+      "created_at": "2026-07-06T21:35:01.932935+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "7556b39a-d322-4d27-b273-f395c55f8181",
+      "output_id": "88f6d1c1-1537-4fe2-9c4d-fe62d509d579",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "7556b39a-d322-4d27-b273-f395c55f8181",
+        "trade_candidate_id": "88f6d1c1-1537-4fe2-9c4d-fe62d509d579",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "a2e5237e-34de-4d3d-92a6-b12cfbab5877",
+      "created_at": "2026-07-06T21:35:01.936271+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "b97a3d38-a7b8-49dc-996c-d865380d8ee1",
+      "output_id": "741fb897-6349-4b09-9b76-88bcacf89c19",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "b97a3d38-a7b8-49dc-996c-d865380d8ee1",
+        "trade_candidate_id": "741fb897-6349-4b09-9b76-88bcacf89c19",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "78afb762-dd4a-4d64-9255-c17fef11f6f2",
+      "created_at": "2026-07-06T21:35:01.941166+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "86b72e1b-bc19-46a9-b216-6ab468e4e6d3",
+      "output_id": "b15f1ba8-b93e-4e55-838a-5620bad49fa3",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "86b72e1b-bc19-46a9-b216-6ab468e4e6d3",
+        "trade_candidate_id": "b15f1ba8-b93e-4e55-838a-5620bad49fa3",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "8ce91523-814d-41f5-86cf-568b84ec8f41",
+      "created_at": "2026-07-06T21:35:01.946078+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "89e04c10-4601-4c94-90ca-dc09213d8ca4",
+      "output_id": "b720cbc6-575a-40c5-8c2c-f0e5e6cc38ba",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "89e04c10-4601-4c94-90ca-dc09213d8ca4",
+        "trade_candidate_id": "b720cbc6-575a-40c5-8c2c-f0e5e6cc38ba",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "ce776be2-1d37-482f-a2b7-2e8560318286",
+      "created_at": "2026-07-06T21:35:01.951582+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "db53eb0b-d666-4a73-88ef-71ace839964c",
+      "output_id": "c65f19eb-5437-4057-b0b8-c0e6d4abb616",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "db53eb0b-d666-4a73-88ef-71ace839964c",
+        "trade_candidate_id": "c65f19eb-5437-4057-b0b8-c0e6d4abb616",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "8a66050d-4975-41be-9a15-c4180dffc1d2",
+      "created_at": "2026-07-06T21:35:01.956571+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "400e842d-63ce-4cee-953a-fafb8215243f",
+      "output_id": "421aa5c9-db33-4b01-8e5c-5d7551f238e6",
+      "reason": "No symbol or action found",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "400e842d-63ce-4cee-953a-fafb8215243f",
+        "trade_candidate_id": "421aa5c9-db33-4b01-8e5c-5d7551f238e6",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "73f97512-6a1a-48c6-b659-3f0ac835e26c",
+      "created_at": "2026-07-06T21:35:01.958249+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "d6abde64-e13a-4b64-8f06-96c9acbfde3d",
+      "output_id": "0fe601de-fe05-4ca2-8d0e-e13d20dbc2de",
+      "reason": "Missing: stop_loss, take_profit",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "d6abde64-e13a-4b64-8f06-96c9acbfde3d",
+        "trade_candidate_id": "0fe601de-fe05-4ca2-8d0e-e13d20dbc2de",
+        "outcome": "hold",
+        "score": 0.0,
+        "candidate_status": "OBSERVE_ONLY",
+        "contributions": []
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "89d27397-fdde-4561-917f-a8a81ffe5506",
+      "created_at": "2026-07-06T21:35:01.960106+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "adf7c9e5-e793-434c-a0d2-dedc1008a341",
+      "output_id": "b754437a-bf9c-4f50-b91f-f096aac06fe1",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "adf7c9e5-e793-434c-a0d2-dedc1008a341",
+        "trade_candidate_id": "b754437a-bf9c-4f50-b91f-f096aac06fe1",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "a04bb7c7-d048-479c-ba12-7895e3539444",
+      "created_at": "2026-07-06T21:35:01.962897+00:00"
+    },
+    {
+      "stage": "decision",
+      "input_id": "8881bab6-ee7a-4370-a1dd-7af269de6ac9",
+      "output_id": "1db261fd-5198-4213-ae3d-d40858897101",
+      "reason": "Valid signal approved for risk review",
+      "version": "1",
+      "payload": {
+        "event_type": "DECISION_CREATED",
+        "parsed_signal_id": "8881bab6-ee7a-4370-a1dd-7af269de6ac9",
+        "trade_candidate_id": "1db261fd-5198-4213-ae3d-d40858897101",
+        "outcome": "approve",
+        "score": 0.5,
+        "candidate_status": "APPROVED_FOR_RISK",
+        "contributions": [
+          {
+            "name": "parsed_signal",
+            "score": 1.0,
+            "weight": 0.5,
+            "value": 0.5,
+            "reason": "Parsed signal is valid"
+          }
+        ]
+      },
+      "trace_id": null,
+      "correlation_id": null,
+      "event_id": "fefeb6b0-058d-4a81-aab5-6443a48f59fc",
+      "created_at": "2026-07-06T21:35:01.967838+00:00"
+    }
+  ]
+}
