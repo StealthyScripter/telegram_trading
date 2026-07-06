@@ -12,11 +12,18 @@ from execution.validation import TradeValidator
 from monitoring.logger import ExecutionLogger
 from reconciliation.broker_reconciler import BrokerReconciler
 from routing.router import DynamicOrderRouter
+from contracts.execution_request import ExecutionRequest
+from contracts.execution_result import (
+    ContractExecutionResult,
+    ContractExecutionStatus,
+)
+from execution.request_adapter import ExecutionRequestAdapter
 
 
 class TradeExecutor:
     def __init__(self, broker_name: str = "oanda"):
         self.broker_name = broker_name
+        self.request_adapter = ExecutionRequestAdapter()
         self.event_store = EventStore()
         self.validator = TradeValidator()
         self.idempotency = PersistentIdempotencyStore()
@@ -336,3 +343,33 @@ class TradeExecutor:
             reason="Unknown broker response",
             raw_response=response,
         )
+
+    def execute_request(self, request: ExecutionRequest):
+        trade = self.request_adapter.to_trade_request(request)
+        result = self.execute_trade(trade)
+
+        return ContractExecutionResult(
+            execution_request_id=request.id,
+            status=self._map_execution_status(result.status),
+            broker=result.broker,
+            account_id=result.account_id,
+            symbol=result.symbol,
+            action=result.action,
+            requested_units=result.requested_units,
+            broker_trade_id=result.broker_trade_id,
+            broker_order_id=result.broker_order_id,
+            reason=result.reason,
+            raw_response=result.raw_response,
+        )
+
+    def _map_execution_status(self, status: ExecutionStatus):
+        mapping = {
+            ExecutionStatus.FILLED: ContractExecutionStatus.FILLED,
+            ExecutionStatus.CANCELED: ContractExecutionStatus.CANCELED,
+            ExecutionStatus.REJECTED: ContractExecutionStatus.REJECTED,
+            ExecutionStatus.PENDING: ContractExecutionStatus.PENDING,
+            ExecutionStatus.DISCREPANCY: ContractExecutionStatus.DISCREPANCY,
+            ExecutionStatus.UNKNOWN: ContractExecutionStatus.UNKNOWN,
+        }
+
+        return mapping.get(status, ContractExecutionStatus.UNKNOWN)
