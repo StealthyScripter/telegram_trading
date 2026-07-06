@@ -1,6 +1,9 @@
 import os
 import requests
 
+from config.instruments import get_instrument_meta
+from execution.brokers.base import BrokerCapabilities, BrokerMetadata, NormalizedBrokerError
+
 
 class OandaBroker:
     def __init__(self, account_id: str | None = None):
@@ -149,6 +152,41 @@ class OandaBroker:
             closed_trades.append(self.close_trade(trade_id))
 
         return closed_trades
+
+    def capabilities(self) -> BrokerCapabilities:
+        return BrokerCapabilities(
+            supports_market_orders=True,
+            supports_limit_orders=True,
+            supports_trade_close=True,
+            supports_partial_fill=True,
+            supports_idempotency=False,
+        )
+
+    def metadata(self, symbol: str | None = None) -> BrokerMetadata:
+        min_units = 1
+        price_precision = None
+        if symbol:
+            meta = get_instrument_meta(symbol)
+            min_units = meta.min_units
+            price_precision = meta.price_precision
+
+        return BrokerMetadata(
+            broker="oanda",
+            account_id=self.account_id,
+            env=self.env,
+            symbol=symbol,
+            min_units=min_units,
+            price_precision=price_precision,
+        )
+
+    def normalize_error(self, error: Exception) -> NormalizedBrokerError:
+        retryable = isinstance(error, (TimeoutError, requests.Timeout))
+        return NormalizedBrokerError(
+            code="BROKER_TIMEOUT" if retryable else "BROKER_ERROR",
+            message=str(error),
+            retryable=retryable,
+            raw_error_type=error.__class__.__name__,
+        )
 
     def get_candles(
         self,

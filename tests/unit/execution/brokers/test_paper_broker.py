@@ -34,3 +34,39 @@ def test_paper_broker_get_price():
 
     assert price["tradeable"] is True
     assert price["bid"] < price["ask"]
+
+
+def test_paper_broker_capability_discovery():
+    capabilities = PaperBroker().capabilities()
+
+    assert capabilities.supports_market_orders is True
+    assert capabilities.supports_limit_orders is True
+    assert capabilities.supports_trade_close is True
+    assert capabilities.supports_idempotency is True
+
+
+def test_paper_broker_metadata_normalization():
+    metadata = PaperBroker(account_id="paper-1").metadata("EUR_USD")
+
+    assert metadata.broker == "paper"
+    assert metadata.account_id == "paper-1"
+    assert metadata.env == "paper"
+    assert metadata.symbol == "EUR_USD"
+    assert metadata.price_precision == 5
+    assert metadata.min_units == 1
+
+
+def test_paper_broker_timeout_normalizes_safely():
+    error = PaperBroker().normalize_error(TimeoutError("slow"))
+
+    assert error.code == "BROKER_TIMEOUT"
+    assert error.retryable is True
+    assert "slow" not in error.message
+
+
+def test_paper_broker_rejection_normalizes_without_raw_leak():
+    error = PaperBroker().normalize_error(RuntimeError("raw provider stack"))
+
+    assert error.code == "BROKER_REJECTED"
+    assert error.retryable is False
+    assert error.raw_error_type == "RuntimeError"

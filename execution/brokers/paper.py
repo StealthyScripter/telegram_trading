@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 
-from execution.brokers.base import BaseBroker
+from config.instruments import get_instrument_meta
+from execution.brokers.base import BaseBroker, BrokerCapabilities, BrokerMetadata, NormalizedBrokerError
 
 
 class PaperBroker(BaseBroker):
@@ -102,3 +103,45 @@ class PaperBroker(BaseBroker):
             self.close_trade(trade["id"])
             for trade in list(self.get_open_trades(symbol=symbol))
         ]
+
+    def capabilities(self) -> BrokerCapabilities:
+        return BrokerCapabilities(
+            supports_market_orders=True,
+            supports_limit_orders=True,
+            supports_trade_close=True,
+            supports_partial_fill=False,
+            supports_idempotency=True,
+        )
+
+    def metadata(self, symbol: str | None = None) -> BrokerMetadata:
+        min_units = 1
+        price_precision = None
+        if symbol:
+            meta = get_instrument_meta(symbol)
+            min_units = meta.min_units
+            price_precision = meta.price_precision
+
+        return BrokerMetadata(
+            broker="paper",
+            account_id=self.account_id,
+            env=self.env,
+            symbol=symbol,
+            min_units=min_units,
+            price_precision=price_precision,
+        )
+
+    def normalize_error(self, error: Exception) -> NormalizedBrokerError:
+        if isinstance(error, TimeoutError):
+            return NormalizedBrokerError(
+                code="BROKER_TIMEOUT",
+                message="Paper broker timeout",
+                retryable=True,
+                raw_error_type=error.__class__.__name__,
+            )
+
+        return NormalizedBrokerError(
+            code="BROKER_REJECTED",
+            message=str(error),
+            retryable=False,
+            raw_error_type=error.__class__.__name__,
+        )
