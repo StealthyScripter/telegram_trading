@@ -91,8 +91,14 @@ class RiskEngine:
         if state.weekly_risk_used >= policy.max_weekly_risk:
             return RiskCheckResult(False, "Max weekly risk limit breached", "max_weekly_risk")
 
+        if state.current_drawdown >= policy.max_drawdown:
+            return RiskCheckResult(False, "Max drawdown stop breached", "max_drawdown")
+
         symbol = candidate.symbol or ""
         source = candidate.source or ""
+        strategy = candidate.strategy_account or "default"
+        currency = self._currency_from_symbol(symbol)
+        correlation_group = self._correlation_group(symbol)
 
         if exposure.symbol_risk.get(symbol, 0.0) >= policy.max_symbol_exposure:
             return RiskCheckResult(False, "Max symbol exposure limit breached", "max_symbol_exposure")
@@ -106,10 +112,26 @@ class RiskEngine:
         if exposure.broker_risk.get(state.broker, 0.0) >= policy.max_broker_exposure:
             return RiskCheckResult(False, "Max broker exposure limit breached", "max_broker_exposure")
 
-        if exposure.total_risk >= policy.max_correlated_exposure:
+        if exposure.currency_risk.get(currency, 0.0) >= policy.max_currency_exposure:
+            return RiskCheckResult(False, "Max currency exposure limit breached", "max_currency_exposure")
+
+        if exposure.strategy_risk.get(strategy, 0.0) >= policy.max_strategy_exposure:
+            return RiskCheckResult(False, "Max strategy exposure limit breached", "max_strategy_exposure")
+
+        if exposure.correlation_risk.get(correlation_group, 0.0) >= policy.max_correlated_exposure:
             return RiskCheckResult(False, "Max correlated exposure limit breached", "max_correlated_exposure")
 
         return RiskCheckResult(True, "Risk approved")
+
+    def _currency_from_symbol(self, symbol: str) -> str:
+        if "_" in symbol:
+            return symbol.split("_")[-1]
+        if len(symbol) >= 6:
+            return symbol[-3:]
+        return symbol
+
+    def _correlation_group(self, symbol: str) -> str:
+        return self._currency_from_symbol(symbol)
 
     def _emit(
         self,
@@ -141,6 +163,9 @@ class RiskEngine:
                         "source_risk": exposure.source_risk,
                         "account_risk": exposure.account_risk,
                         "broker_risk": exposure.broker_risk,
+                        "currency_risk": exposure.currency_risk,
+                        "strategy_risk": exposure.strategy_risk,
+                        "correlation_risk": exposure.correlation_risk,
                     },
                 },
             )

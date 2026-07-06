@@ -18,6 +18,7 @@ def candidate(**overrides):
         "action": "buy",
         "stop_loss": "1.0950",
         "take_profits": ["1.1100"],
+        "strategy_account": "scalping",
     }
     data.update(overrides)
     return TradeCandidate(**data)
@@ -120,6 +121,70 @@ def test_rejected_broker_exposure(tmp_path):
 
     assert decision.status == RiskDecisionStatus.REJECTED
     assert "broker" in decision.reason
+
+
+def test_rejected_currency_exposure(tmp_path):
+    positions = [
+        OpenPosition("GBP_USD", "beta", "oanda", "acct-1", 1000, 100, currency="USD")
+    ]
+
+    decision = engine(
+        tmp_path,
+        RiskPolicy(max_currency_exposure=100),
+    ).evaluate(candidate(), state(positions))
+
+    assert decision.status == RiskDecisionStatus.REJECTED
+    assert "currency" in decision.reason
+
+
+def test_rejected_correlated_exposure(tmp_path):
+    positions = [
+        OpenPosition("GBP_USD", "beta", "oanda", "acct-1", 1000, 100, correlation_group="USD")
+    ]
+
+    decision = engine(
+        tmp_path,
+        RiskPolicy(max_correlated_exposure=100),
+    ).evaluate(candidate(), state(positions))
+
+    assert decision.status == RiskDecisionStatus.REJECTED
+    assert "correlated" in decision.reason
+
+
+def test_rejected_strategy_exposure(tmp_path):
+    positions = [
+        OpenPosition("GBP_USD", "beta", "oanda", "acct-1", 1000, 100, strategy="scalping")
+    ]
+
+    decision = engine(
+        tmp_path,
+        RiskPolicy(max_strategy_exposure=100),
+    ).evaluate(candidate(), state(positions))
+
+    assert decision.status == RiskDecisionStatus.REJECTED
+    assert "strategy" in decision.reason
+
+
+def test_rejected_drawdown_stop(tmp_path):
+    decision = engine(
+        tmp_path,
+        RiskPolicy(max_drawdown=100),
+    ).evaluate(candidate(), state(current_drawdown=100))
+
+    assert decision.status == RiskDecisionStatus.REJECTED
+    assert "drawdown" in decision.reason
+
+
+def test_same_inputs_produce_same_risk_decision_status_and_reason(tmp_path):
+    risk = engine(tmp_path)
+    trade = candidate()
+    portfolio = state()
+
+    first = risk.evaluate(trade, portfolio)
+    second = risk.evaluate(trade, portfolio)
+
+    assert first.status == second.status
+    assert first.reason == second.reason
 
 
 def test_rejected_candidate_status(tmp_path):
