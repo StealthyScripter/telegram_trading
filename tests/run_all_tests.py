@@ -17,12 +17,22 @@ def main():
         if venv_python.exists():
             python_executable = str(venv_python)
 
+    default_paths = [
+        "tests/contract",
+        "tests/unit",
+        "tests/pipeline",
+        "tests/e2e",
+    ]
+
+    if include_integration:
+        default_paths.append("tests/integration")
+
     command = [
         python_executable,
         "-m",
         "pytest",
         "-s",
-        *(paths or ["tests"]),
+        *(paths or default_paths),
     ]
 
     if not include_integration:

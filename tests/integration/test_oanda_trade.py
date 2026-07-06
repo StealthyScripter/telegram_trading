@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from dotenv import load_dotenv
 
@@ -29,6 +31,21 @@ def calculate_valid_tp_sl(
 
 @pytest.mark.integration
 def test_oanda_market_trade_and_close():
+    if os.getenv("RUN_OANDA_INTEGRATION", "false").lower() != "true":
+        pytest.skip("Set RUN_OANDA_INTEGRATION=true to run real OANDA integration")
+
+    if os.getenv("OANDA_ENV") == "live":
+        pytest.skip("Real OANDA integration must not run against live environment")
+
+    required = [
+        "OANDA_API_TOKEN",
+        "OANDA_ACCOUNT_ID",
+        "OANDA_ACCOUNT_SCALPING",
+    ]
+    missing = [name for name in required if not os.getenv(name)]
+    if missing:
+        pytest.skip(f"Missing OANDA integration env vars: {', '.join(missing)}")
+
     broker = OandaBroker()
     executor = TradeExecutor(broker_name="oanda")
 
@@ -36,13 +53,22 @@ def test_oanda_market_trade_and_close():
     action = "buy"
     units = 1000
 
-    existing_trades = broker.get_open_trades(symbol=symbol)
+    try:
+        existing_trades = broker.get_open_trades(symbol=symbol)
+    except RuntimeError as error:
+        pytest.skip(f"OANDA open trades unavailable: {error}")
 
     if existing_trades:
         print(f"Closing {len(existing_trades)} existing {symbol} trade(s)")
         broker.close_open_trades(symbol=symbol)
 
-    price = broker.get_price(symbol)
+    try:
+        price = broker.get_price(symbol)
+    except RuntimeError as error:
+        pytest.skip(f"OANDA price unavailable: {error}")
+
+    if not price.get("tradeable", True):
+        pytest.skip(f"{symbol} is not tradeable")
     current_price = price["ask"] if action == "buy" else price["bid"]
 
     take_profit, stop_loss = calculate_valid_tp_sl(
