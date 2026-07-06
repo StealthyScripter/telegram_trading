@@ -16,6 +16,11 @@ class PipelineResult:
     execution_result: object | None = None
 
 
+class _NoopLedger:
+    def append(self, event):
+        return event.to_dict()
+
+
 class Pipeline:
     def __init__(
         self,
@@ -24,9 +29,9 @@ class Pipeline:
         ledger: EventLedger | None = None,
         execution_service=None,
     ):
-        self.parser = parser or SignalParser()
-        self.decision_engine = decision_engine or DecisionEngine()
         self.ledger = ledger or EventLedger()
+        self.parser = parser or SignalParser()
+        self.decision_engine = decision_engine or DecisionEngine(ledger=_NoopLedger())
         self.execution_service = execution_service
 
     def run(self, raw_message: RawMessage, execution_request=None) -> PipelineResult:
