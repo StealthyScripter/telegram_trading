@@ -7,3 +7,4 @@ venv/
 *.session
 *.session-journal
 data/signals.json
+data/trade_events.json

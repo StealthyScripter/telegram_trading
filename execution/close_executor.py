@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 from brokers.factory import BrokerFactory
 from controls.bot_controls import BotControls
 from data.execution_store import ExecutionStore
+from events.event_store import EventStore
+from events.trade_event import TradeEvent, TradeEventType
 from monitoring.logger import ExecutionLogger
 
 
@@ -14,6 +16,7 @@ class CloseExecutor:
         self.bot_controls = BotControls()
         self.store = ExecutionStore()
         self.logger = ExecutionLogger()
+        self.event_store = EventStore()
 
     def close_trade(
         self,
@@ -35,6 +38,7 @@ class CloseExecutor:
         self.bot_controls.assert_can_trade(broker.env)
 
         payload = {
+            "request_id": request_id,
             "broker": broker_name,
             "broker_env": broker.env,
             "account_id": account_id,
@@ -44,7 +48,18 @@ class CloseExecutor:
         }
 
         self.store.create_close_attempt(request_id, payload)
-        self.logger.info("close_attempt_started", {"request_id": request_id, **payload})
+        self.logger.info("close_attempt_started", payload)
+
+        self.event_store.append(
+            TradeEvent(
+                event_type=TradeEventType.TRADE_CLOSE_REQUESTED,
+                trade_id=trade_id,
+                broker=broker_name,
+                account_id=account_id,
+                symbol=symbol,
+                payload=payload,
+            )
+        )
 
         try:
             self.store.update_close_attempt(
@@ -70,13 +85,31 @@ class CloseExecutor:
             )
 
             if is_still_open:
+                discrepancy_reason = (
+                    "Trade close response received but broker trade still exists after retries"
+                )
+
                 self.store.update_close_attempt(
                     request_id,
                     {
                         "status": "DISCREPANCY",
-                        "reason": "Trade close response received but broker trade still exists after retries",
+                        "reason": discrepancy_reason,
                         "raw_response": response,
                     },
+                )
+
+                self.event_store.append(
+                    TradeEvent(
+                        event_type=TradeEventType.DISCREPANCY_DETECTED,
+                        trade_id=trade_id,
+                        broker=broker_name,
+                        account_id=account_id,
+                        symbol=symbol,
+                        payload={
+                            "reason": discrepancy_reason,
+                            "raw_response": response,
+                        },
+                    )
                 )
 
                 self.logger.error(
@@ -90,22 +123,34 @@ class CloseExecutor:
                     },
                 )
 
-                raise RuntimeError("Close discrepancy: broker trade still exists after retries")
+                raise RuntimeError(
+                    "Close discrepancy: broker trade still exists after retries"
+                )
 
             order_fill = response.get("orderFillTransaction", {})
             trades_closed = order_fill.get("tradesClosed", [])
             first_closed = trades_closed[0] if trades_closed else {}
 
-            self.store.update_close_attempt(
-                request_id,
-                {
-                    "status": "CLOSED",
-                    "reason": order_fill.get("reason"),
-                    "close_price": first_closed.get("price"),
-                    "realized_pl": first_closed.get("realizedPL"),
-                    "closed_at": datetime.now(timezone.utc).isoformat(),
-                    "raw_response": response,
-                },
+            close_payload = {
+                "status": "CLOSED",
+                "reason": order_fill.get("reason"),
+                "close_price": first_closed.get("price"),
+                "realized_pl": first_closed.get("realizedPL"),
+                "closed_at": datetime.now(timezone.utc).isoformat(),
+                "raw_response": response,
+            }
+
+            self.store.update_close_attempt(request_id, close_payload)
+
+            self.event_store.append(
+                TradeEvent(
+                    event_type=TradeEventType.TRADE_CLOSED,
+                    trade_id=trade_id,
+                    broker=broker_name,
+                    account_id=account_id,
+                    symbol=symbol,
+                    payload=close_payload,
+                )
             )
 
             self.logger.info(

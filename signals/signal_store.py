@@ -4,11 +4,15 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+from events.event_store import EventStore
+from events.trade_event import TradeEvent, TradeEventType
+
 
 class SignalStore:
     def __init__(self, path: str = "data/signals.json"):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.event_store = EventStore()
 
         if not self.path.exists():
             self._write({"signals": []})
@@ -66,7 +70,9 @@ class SignalStore:
             "source_title": source_title,
             "chat_id": str(chat_id) if chat_id is not None else None,
             "message_id": str(message_id),
-            "posted_at": posted_at.isoformat() if hasattr(posted_at, "isoformat") else str(posted_at),
+            "posted_at": posted_at.isoformat()
+            if hasattr(posted_at, "isoformat")
+            else str(posted_at),
             "received_at": datetime.now(timezone.utc).isoformat(),
             "raw_text": raw_text,
             "parse_status": "UNPARSED",
@@ -76,6 +82,15 @@ class SignalStore:
 
         data["signals"].append(record)
         self._write(data)
+
+        self.event_store.append(
+            TradeEvent(
+                event_type=TradeEventType.SIGNAL_RECEIVED,
+                source=source,
+                signal_id=signal_id,
+                payload=record,
+            )
+        )
 
         return {
             "saved": True,
@@ -99,3 +114,4 @@ class SignalStore:
                 return signal
 
         raise ValueError(f"No signal found for signal_id: {signal_id}")
+    

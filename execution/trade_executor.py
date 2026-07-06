@@ -4,6 +4,8 @@ from brokers.factory import BrokerFactory
 from controls.bot_controls import BotControls
 from controls.trade_controls import TradeControls
 from data.execution_store import ExecutionStore
+from events.event_store import EventStore
+from events.trade_event import TradeEvent, TradeEventType
 from execution.idempotency import PersistentIdempotencyStore
 from execution.models import ExecutionResult, ExecutionStatus
 from execution.validation import TradeValidator
@@ -15,6 +17,7 @@ from routing.router import DynamicOrderRouter
 class TradeExecutor:
     def __init__(self, broker_name: str = "oanda"):
         self.broker_name = broker_name
+        self.event_store = EventStore()
         self.validator = TradeValidator()
         self.idempotency = PersistentIdempotencyStore()
         self.logger = ExecutionLogger()
@@ -106,6 +109,19 @@ class TradeExecutor:
         self.store.create_attempt(request_id, attempt_payload)
         self.logger.info("trade_attempt_started", attempt_payload)
 
+        self.event_store.append(
+            TradeEvent(
+                event_type=TradeEventType.ORDER_SUBMITTED,
+                source=trade.source,
+                signal_id=trade.external_signal_id,
+                broker=broker_name,
+                account_id=account_id,
+                symbol=trade.symbol,
+                strategy=trade.strategy_account,
+                payload=attempt_payload,
+            )
+        )
+
         try:
             self.store.update_attempt(
                 request_id,
@@ -153,6 +169,7 @@ class TradeExecutor:
             result = self._parse_oanda_response(
                 response=response,
                 account_id=account_id,
+                broker_name=broker_name,
                 trade=trade,
                 units=units,
             )
@@ -168,6 +185,13 @@ class TradeExecutor:
                 },
             )
 
+            self._append_execution_result_event(
+                result=result,
+                trade=trade,
+                broker_name=broker_name,
+                account_id=account_id,
+            )
+
             result = self.reconciler.verify_execution(broker, result)
 
             if result.status == ExecutionStatus.DISCREPANCY:
@@ -177,6 +201,20 @@ class TradeExecutor:
                         "status": ExecutionStatus.DISCREPANCY.value,
                         "reason": result.reason,
                     },
+                )
+
+                self.event_store.append(
+                    TradeEvent(
+                        event_type=TradeEventType.DISCREPANCY_DETECTED,
+                        source=trade.source,
+                        signal_id=trade.external_signal_id,
+                        trade_id=result.broker_trade_id,
+                        broker=broker_name,
+                        account_id=account_id,
+                        symbol=trade.symbol,
+                        strategy=trade.strategy_account,
+                        payload=result.__dict__,
+                    )
                 )
 
                 self.logger.error("broker_state_discrepancy", result.__dict__)
@@ -211,7 +249,37 @@ class TradeExecutor:
 
             raise
 
-    def _parse_oanda_response(self, response, account_id, trade, units):
+    def _append_execution_result_event(
+        self,
+        result,
+        trade,
+        broker_name: str,
+        account_id: str,
+    ):
+        event_type = {
+            ExecutionStatus.FILLED: TradeEventType.ORDER_FILLED,
+            ExecutionStatus.CANCELED: TradeEventType.ORDER_CANCELED,
+            ExecutionStatus.REJECTED: TradeEventType.ORDER_REJECTED,
+        }.get(result.status)
+
+        if not event_type:
+            return
+
+        self.event_store.append(
+            TradeEvent(
+                event_type=event_type,
+                source=trade.source,
+                signal_id=trade.external_signal_id,
+                trade_id=result.broker_trade_id,
+                broker=broker_name,
+                account_id=account_id,
+                symbol=trade.symbol,
+                strategy=trade.strategy_account,
+                payload=result.__dict__,
+            )
+        )
+
+    def _parse_oanda_response(self, response, account_id, broker_name, trade, units):
         order_fill = response.get("orderFillTransaction")
         order_cancel = response.get("orderCancelTransaction")
         order_create = response.get("orderCreateTransaction")
@@ -221,7 +289,7 @@ class TradeExecutor:
 
             return ExecutionResult(
                 status=ExecutionStatus.FILLED,
-                broker=trade.broker,
+                broker=broker_name,
                 account_id=account_id,
                 symbol=trade.symbol,
                 action=trade.action,
@@ -235,7 +303,7 @@ class TradeExecutor:
         if order_cancel:
             return ExecutionResult(
                 status=ExecutionStatus.CANCELED,
-                broker=trade.broker,
+                broker=broker_name,
                 account_id=account_id,
                 symbol=trade.symbol,
                 action=trade.action,
@@ -248,7 +316,7 @@ class TradeExecutor:
         if order_create:
             return ExecutionResult(
                 status=ExecutionStatus.PENDING,
-                broker=trade.broker,
+                broker=broker_name,
                 account_id=account_id,
                 symbol=trade.symbol,
                 action=trade.action,
@@ -260,7 +328,7 @@ class TradeExecutor:
 
         return ExecutionResult(
             status=ExecutionStatus.UNKNOWN,
-            broker=trade.broker,
+            broker=broker_name,
             account_id=account_id,
             symbol=trade.symbol,
             action=trade.action,
