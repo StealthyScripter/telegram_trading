@@ -1,5 +1,5 @@
 from contracts.trade_candidate import TradeCandidateStatus
-from decision.channel_intelligence import ManualOverride
+from decision.channel_intelligence import EventLedger, ManualOverride
 from decision.decision_engine import DecisionEngine
 from tests.unit.decision.channel_intelligence.helpers import parsed_signal, service
 
@@ -8,7 +8,10 @@ def test_decision_engine_consumes_channel_context(tmp_path):
     intelligence = service(tmp_path)
     intelligence.set_manual_override("telegram_test", ManualOverride.FORCE_PAPER)
 
-    candidate = DecisionEngine(channel_intelligence=intelligence).evaluate(
+    candidate = DecisionEngine(
+        channel_intelligence=intelligence,
+        ledger=EventLedger(path=str(tmp_path / "decision_ledger.json")),
+    ).evaluate(
         parsed_signal()
     )
 
@@ -20,7 +23,10 @@ def test_decision_engine_force_reject_does_not_execute_or_approve(tmp_path):
     intelligence = service(tmp_path)
     intelligence.set_manual_override("telegram_test", ManualOverride.FORCE_REJECT)
 
-    candidate = DecisionEngine(channel_intelligence=intelligence).evaluate(
+    candidate = DecisionEngine(
+        channel_intelligence=intelligence,
+        ledger=EventLedger(path=str(tmp_path / "decision_ledger.json")),
+    ).evaluate(
         parsed_signal()
     )
 

@@ -27,7 +27,10 @@ def test_channel_pipeline_applies_channel_intelligence(tmp_path):
     intelligence.set_manual_override("telegram_channel", ManualOverride.FORCE_PAPER)
 
     pipeline = Pipeline(
-        decision_engine=DecisionEngine(channel_intelligence=intelligence),
+        decision_engine=DecisionEngine(
+            channel_intelligence=intelligence,
+            ledger=EventLedger(path=str(tmp_path / "decision_ledger.json")),
+        ),
         ledger=EventLedger(path=str(tmp_path / "pipeline_ledger.json")),
     )
 
@@ -44,7 +47,12 @@ def test_backtest_pipeline_feeds_channel_profile(tmp_path):
         ledger=EventLedger(path=str(tmp_path / "channel_ledger.json")),
         config=make_test_config(),
     )
-    pipeline = Pipeline(ledger=EventLedger(path=str(tmp_path / "pipeline_ledger.json")))
+    pipeline = Pipeline(
+        decision_engine=DecisionEngine(
+            ledger=EventLedger(path=str(tmp_path / "decision_ledger.json")),
+        ),
+        ledger=EventLedger(path=str(tmp_path / "pipeline_ledger.json")),
+    )
 
     BacktestPipeline(
         pipeline=pipeline,
