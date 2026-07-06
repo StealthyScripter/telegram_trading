@@ -30,6 +30,14 @@ from decision.ml_model import (
     ModelVersion,
     SignalQualityPrediction,
 )
+from decision.strategy_fusion import (
+    FusionDecision,
+    SignalSourceType,
+    SourceContribution,
+    StrategyFusionEngine,
+    StrategyFusionEventType,
+    StrategySignal,
+)
 
 __all__ = [
     "ChannelGrade",
@@ -53,6 +61,12 @@ __all__ = [
     "ModelInputFeatures",
     "ModelVersion",
     "SignalQualityPrediction",
+    "FusionDecision",
+    "SignalSourceType",
+    "SourceContribution",
+    "StrategyFusionEngine",
+    "StrategyFusionEventType",
+    "StrategySignal",
     "ManualOverride",
     "PromotionDecision",
     "PromotionThresholds",
