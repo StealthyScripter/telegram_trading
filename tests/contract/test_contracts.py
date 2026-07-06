@@ -1,4 +1,5 @@
 import pytest
+from dataclasses import FrozenInstanceError
 
 from contracts.capital_allocation import CapitalAllocation
 from contracts.execution_request import ExecutionMode, ExecutionRequest
@@ -23,6 +24,19 @@ def test_raw_message_contract():
 
     assert message.source == "telegram_channel"
     assert message.to_dict()["raw_text"] == "BUY EURUSD SL 1.1300 TP 1.1400"
+
+
+def test_contracts_are_immutable():
+    message = RawMessage(
+        source="telegram_test",
+        message_id="1",
+        raw_text="BUY EURUSD",
+        posted_at="2026-01-01T10:00:00+00:00",
+        received_at="2026-01-01T10:00:01+00:00",
+    )
+
+    with pytest.raises(FrozenInstanceError):
+        message.source = "changed"
 
 
 def test_raw_message_rejects_empty_text():

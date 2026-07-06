@@ -15,7 +15,7 @@ class ContractExecutionStatus(str, Enum):
 
 
 @dataclass(frozen=True)
-class ContractExecutionResult(BaseContract):
+class ExecutionResult(BaseContract):
     execution_request_id: str = ""
     status: ContractExecutionStatus = ContractExecutionStatus.UNKNOWN
     broker: str = ""
@@ -31,4 +31,7 @@ class ContractExecutionResult(BaseContract):
 
     def __post_init__(self):
         if not self.execution_request_id:
-            raise ValueError("ContractExecutionResult.execution_request_id is required")
+            raise ValueError("ExecutionResult.execution_request_id is required")
+
+
+ContractExecutionResult = ExecutionResult
