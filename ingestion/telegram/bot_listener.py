@@ -4,12 +4,11 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from contracts.raw_message import RawMessage
-from parsing.processor import SignalProcessor
 
 import requests
 from dotenv import load_dotenv
 
-from signals.signal_store import SignalStore
+from storage.signal_store import SignalStore
 
 load_dotenv()
 
@@ -26,7 +25,6 @@ class TelegramBotListener:
         self.chat_id = str(chat_id or os.getenv("TELEGRAM_CHAT_ID") or "")
         self.store = store or SignalStore()
         self.offset_path = Path(offset_path)
-        self.processor = SignalProcessor()
 
         if not self.token:
             raise ValueError("Missing TELEGRAM_BOT_TOKEN in .env")
@@ -185,20 +183,15 @@ class TelegramBotListener:
         )
 
         if result.get("saved") and "record" in result:
-            processed = self.processor.process_raw_signal(result["record"])
-
             self.store.update_signal(
-                signal_id=processed["signal_id"],
+                signal_id=result["signal_id"],
                 updates={
-                    "parse_status": processed["parse_status"],
-                    "parsed_signal": processed["parsed_signal"],
-                    "execution_status": processed["execution_status"],
                     "latency_ms": latency_ms,
                     "poll_elapsed_ms": elapsed_ms,
                 },
             )
 
-            result["record"] = processed
+            result["record"] = self.store.all_signals()[-1]
 
         return result
 

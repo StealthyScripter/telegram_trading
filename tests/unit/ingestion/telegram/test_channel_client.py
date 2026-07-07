@@ -38,7 +38,7 @@ async def test_channel_client_handles_message_and_raw_message(tmp_path, monkeypa
     raw_message = await client.to_raw_message(FakeMessage())
 
     assert result["saved"] is True
-    assert result["record"]["parse_status"] == "VALID_SIGNAL"
+    assert result["record"]["parse_status"] == "UNPARSED"
     assert isinstance(raw_message, RawMessage)
 
 

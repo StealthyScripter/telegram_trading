@@ -26,7 +26,7 @@ class EmptyMessage(FakeMessage):
 
 
 @pytest.mark.asyncio
-async def test_channel_client_handles_and_parses_message(monkeypatch, tmp_path):
+async def test_channel_client_handles_raw_message(monkeypatch, tmp_path):
     monkeypatch.setenv("TELEGRAM_API_ID", "123")
     monkeypatch.setenv("TELEGRAM_API_HASH", "abc")
     monkeypatch.setenv("TELEGRAM_PHONE", "+10000000000")
@@ -46,9 +46,9 @@ async def test_channel_client_handles_and_parses_message(monkeypatch, tmp_path):
 
     assert len(signals) == 1
     assert signals[0]["source"] == "fake_signals"
-    assert signals[0]["parse_status"] == "VALID_SIGNAL"
-    assert signals[0]["execution_status"] == "READY_FOR_PAPER"
-    assert signals[0]["parsed_signal"]["symbol"] == "EUR_USD"
+    assert signals[0]["parse_status"] == "UNPARSED"
+    assert signals[0]["execution_status"] == "OBSERVE_ONLY"
+    assert signals[0]["parsed_signal"] is None
 
 
 @pytest.mark.asyncio

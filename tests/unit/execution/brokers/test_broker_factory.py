@@ -16,7 +16,7 @@ def test_broker_factory_creates_oanda_without_changing_import(monkeypatch):
         def __init__(self, account_id):
             self.account_id = account_id
 
-    monkeypatch.setattr("brokers.factory.OandaBroker", FakeOanda)
+    monkeypatch.setattr("execution.brokers.factory.OandaBroker", FakeOanda)
 
     broker = BrokerFactory().create("oanda", "acct-1")
 

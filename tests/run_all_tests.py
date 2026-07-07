@@ -18,6 +18,7 @@ def main():
             python_executable = str(venv_python)
 
     default_paths = [
+        "tests/architecture",
         "tests/contracts",
         "tests/unit",
         "tests/pipeline",

@@ -9,8 +9,8 @@ def test_paper_trade_open_close_flow_replaces_safe_oanda_behavior(monkeypatch):
         touched["oanda"] = True
         raise AssertionError("OANDA must not be touched by safe paper flow")
 
-    monkeypatch.setattr("brokers.oanda.OandaBroker.__init__", fail_if_oanda_touched)
-    monkeypatch.setattr("brokers.factory.OandaBroker", fail_if_oanda_touched)
+    monkeypatch.setattr("execution.brokers.oanda.OandaBroker.__init__", fail_if_oanda_touched)
+    monkeypatch.setattr("execution.brokers.factory.OandaBroker", fail_if_oanda_touched)
 
     broker = PaperBroker(account_id="paper-safe", price=1.1000)
     open_response = broker.place_order(

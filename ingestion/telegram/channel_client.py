@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 from telethon import TelegramClient, events
 
 from contracts.raw_message import RawMessage
-from parsing.processor import SignalProcessor
-from signals.signal_store import SignalStore
+from storage.signal_store import SignalStore
 
 load_dotenv()
 
@@ -36,7 +35,6 @@ class TelegramChannelClient:
 
         self.channels = channels
         self.store = store or SignalStore()
-        self.processor = SignalProcessor()
 
         self.client = TelegramClient(
             self.session_name,
@@ -126,19 +124,6 @@ class TelegramChannelClient:
 
         if not result.get("saved"):
             return result
-
-        processed = self.processor.process_raw_signal(result["record"])
-
-        self.store.update_signal(
-            signal_id=processed["signal_id"],
-            updates={
-                "parse_status": processed["parse_status"],
-                "parsed_signal": processed["parsed_signal"],
-                "execution_status": processed["execution_status"],
-            },
-        )
-
-        result["record"] = processed
         return result
 
     async def to_raw_message(

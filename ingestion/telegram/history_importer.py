@@ -2,7 +2,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 
-from signals.telegram_channel_client import TelegramChannelClient
+from ingestion.telegram.channel_client import TelegramChannelClient
 
 load_dotenv()
 

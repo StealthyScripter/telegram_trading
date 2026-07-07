@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from telethon import TelegramClient, events
 
 from contracts.raw_message import RawMessage
-from signals.signal_store import SignalStore
+from storage.signal_store import SignalStore
 
 load_dotenv()
 
